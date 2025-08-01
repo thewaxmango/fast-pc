@@ -1,0 +1,1 @@
+/usr/bin/g++ -g "CMakeFiles/fast-pc.dir/src/main.cpp.o" -o /home/mxyy/coding/fast-pc/bin/fast-pc

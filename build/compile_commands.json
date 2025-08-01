@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/mxyy/coding/fast-pc/build",
+  "command": "/usr/bin/g++  -I/home/mxyy/coding/fast-pc/src -I/home/mxyy/coding/fast-pc/include -g -std=gnu++17 -o CMakeFiles/fast-pc.dir/src/main.cpp.o -c /home/mxyy/coding/fast-pc/src/main.cpp",
+  "file": "/home/mxyy/coding/fast-pc/src/main.cpp",
+  "output": "CMakeFiles/fast-pc.dir/src/main.cpp.o"
+}
+]
