@@ -50,9 +50,9 @@ namespace rule
     };
     struct piecestate
     {
-        piece piece;
-        direction direction;
-        offset offset;
+        piece pc;
+        direction dir;
+        offset os;
     };
     struct inputallowed
     {

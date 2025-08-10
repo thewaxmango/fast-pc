@@ -14,7 +14,7 @@ namespace engine {
     };
 
     void disp_state(rule::pcstate pcstate, rule::piecestate piecestate) {
-        rule::mask piecemask = rule::piecemasks[piecestate.piece][piecestate.direction] << piecestate.offset;
+        rule::mask piecemask = rule::piecemasks[piecestate.pc][piecestate.dir] << piecestate.os;
         for (int i = 0; i < rule::width * pcstate.lines; ++i) {
             if (pcstate.board & piecemask & (1 << i))
                 std::cout << "XX";
@@ -30,7 +30,7 @@ namespace engine {
     };
 
     inline bool collides(rule::pcstate pcstate, rule::piecestate piecestate) {
-        return pcstate.board & (rule::piecemasks[piecestate.piece][piecestate.direction] << piecestate.offset);
+        return pcstate.board & (rule::piecemasks[piecestate.pc][piecestate.dir] << piecestate.os);
     }
 
     inline rule::mask apply_offset(rule::mask mask, rule::offset offset) {
@@ -38,7 +38,7 @@ namespace engine {
     }
 
     inline rule::mask place(rule::mask board, rule::piecestate piecestate) {
-        return board | (rule::piecemasks[piecestate.piece][piecestate.direction] << piecestate.offset);
+        return board | (rule::piecemasks[piecestate.pc][piecestate.dir] << piecestate.os);
     }
 
     inline rule::mask clear_lines(rule::pcstate pcstate) {
@@ -56,12 +56,12 @@ namespace engine {
     }
 
     rule::mask validinput(rule::offset inputoffset, rule::mask board, rule::mask validprior, rule::piece piece, rule::direction finaldir) {
-        // check each mino for collision
-        // reverse inverse of board
-        rule::mask inverseboard = ~board;
+        rule::mask invboard = ~board;
+        rule::mask result = validprior;
         for (rule::offset minooffset : rule::minooffsets[piece][finaldir]) {
-            board &= (inverseboard << ) << moveoffset;
+            result &= apply_offset(invboard, inputoffset - minooffset);
         }
+        return result;
     }
 
     rule::inputallowed gen_inputallowed(rule::mask board, rule::piece piece, rule::direction direction) {
